@@ -495,3 +495,56 @@ def merge_dictionaries(d1, d2):
         d[key] = d.get(key, 0) + value
     return d
 
+
+
+----------------------------------------------------
+#decision tree
+
+import numpy as np
+import pandas as pd
+import scipy
+import scipy.stats as scs
+import operator
+import math
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+from matplotlib.colors import ListedColormap
+from sklearn import neighbors, datasets, tree
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import make_pipeline
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import log_loss
+
+%matplotlib inline
+# Make it pretty
+plt.style.use('ggplot')
+
+# Seed random functions for reproducibility
+np.random.seed(3)
+
+--------------------------------------
+#parameters unpacked in a dictionary
+
+params = {'n_estimators': 500, 'max_depth': 4, 'min_samples_split': 2,
+          'learning_rate': 0.01, 'loss': 'ls'}
+clf = ensemble.GradientBoostingRegressor(**params)
+
+# staged_predict
+# compute test set deviance
+test_score = np.zeros((params['n_estimators'],), dtype=np.float64)
+
+for i, y_pred in enumerate(clf.staged_predict(X_test)):
+    test_score[i] = clf.loss_(y_test, y_pred)
+
+--------------------------------------------
+#pandas 
+
+#want to change '567-987' to 987 (int)
+def get_max_score(fico_range):
+    return int(df.partition('-')[2])
+
+df['fico_scores'] = df['fico_scores'].apply(get_max_score)
+
+--------------------------------------------
+
+
