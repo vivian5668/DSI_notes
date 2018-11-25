@@ -539,6 +539,8 @@ for i, y_pred in enumerate(clf.staged_predict(X_test)):
 --------------------------------------------
 #pandas 
 
+#partition is better than split, if one's right part is missing, there won't be an index error
+
 #want to change '567-987' to 987 (int)
 def get_max_score(fico_range):
     return int(df.partition('-')[2])
@@ -546,5 +548,34 @@ def get_max_score(fico_range):
 df['fico_scores'] = df['fico_scores'].apply(get_max_score)
 
 --------------------------------------------
+#pickle
+
+import pickle
+with open('tf.pkl', 'wb') as f:
+   pickle.dump(obj=tf, file=f)
+
+import pickle
+import sklearn.feature_extraction.text import CountVectorizer
+
+with open('tf.plk', 'rb') as f:
+   tf = pickle.load(f)
+
+--------------------------------------------
+#log odds <---> probability
+log_odds = np.linspace(-7, 7, 29)
+odds = np.exp(log_odds)
+prob = odds / (1+odds)
+pd.DataFrame(
+    np.vstack((log_odds, prob)),
+    index=('Log Odds', 'Probability')
+    ).T
 
 
+plt.plot(log_odds, prob)
+--------------------------------------------
+# if you need to see sklearn dataset data description
+
+print(digits.DESCR)
+
+
+--------------------------------------------
