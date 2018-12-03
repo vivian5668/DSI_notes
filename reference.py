@@ -577,5 +577,160 @@ plt.plot(log_odds, prob)
 
 print(digits.DESCR)
 
+Python OOP
+--------------------------------------------
+#print all attrbutes of an object
+print(Employee.__dict__)
+ #!!! help function
+ print(help(Developer))
+ print(isinstance(dev1, Employee)) --> True
+ print(issubclass(Developer, Employee)) --> True
+
+ #print details of an object
+ def __repr(self):
+     return 'Employee is: {}'.format(name)
+# str should be more user-friendly, repr is for devs
+def __str__(self):
+    return .......
+# to use 
+print(repr(emp1))
+print(str(emp))
+
+#too kinds of class variables
+#--- with self. --> can only be accessed after an instance has been created
+#--- without self. --> can be accessed directly. Employee.raise --ok
+
+# now we can count how many objects have been instantiated
+class Employee:
+    num_of_emps = 0
+
+    def __init__(self, name):
+        self.name = name
+        Employee.num_of_emps += 1
+
+# regular method, class method and static methods
+#--- regular method takes self as first argument
+#--- class method takes 'cls' as first argument, class is taken
+#--- static methods don't take anything
+class Employee:
+    num_of_emps = 0
+    raise_amount = 1.04
+
+    def __init__(self, first, last, pay):
+        self.first = first
+        self........
+
+        Employee.num_of_emps += 1
+    def print_name(self):
+        return self.name
+
+    @classmethod
+    def set_raise(cls, amount):
+        cls.raise_amount = amount
+
+    #this will work as alternative constructors
+    @classmethod
+    def name_from_string(cls, emp_str):
+        first, last, pay = emp_str.split('-')
+        return cls(first, last, pay)
+
+    @staticmethod
+    def is_workday(day):
+        if day.weekday() == 5 or if day.weekday() == 6:
+            return False
+        return True
+#how to use this
+Employee.set_raise(1.05)
+#use cases for having a class method
+#give the option of creating from a parsed string
+employee1 = Employee.name_from_string(emp1_str)
+
+#static method
+print(Employee.is_workday(my_date))
 
 --------------------------------------------
+#inheritance
+class Developer(Employee):
+    pass
+
+ # python will look at the resolution order-- it can't find any declaration
+ # in the Developer class, so it will look into the Employee parent class
+
+ dev1 = Developer('Joe', 'Doe', 5000)
+ dev1.first -> 'Joe'
+
+
+
+#if you want to add additional methods to Developer
+class Developer(Employee):
+    raise_amount = 1.04 #this is an override
+
+    def __init__(self, first, last, pay, prog_lang):
+        super().__init__(first, last, pay)
+        self.prog_lang = prog_lang
+
+class Manager(Employee):
+    def __init__(self, first, last, pay, employees=None):
+        super().__init__(first, last, pay)
+        if employees is None:
+            self.employees = []
+        else:
+            self.employees = employees
+
+    def add_emp(self, emp):
+        if emp not in self.employees:
+            self.employees.append(emp)
+
+--------------------------------------------
+#getter and setter
+#getter allows you to get an attribute of an object even of it was implemented 
+#with a function
+class Employee:
+    def __init__(self, first, last):
+        self.first = first
+        self.last = last
+
+    @property
+    def email(self):
+        return '{}.{}@email.com'.format(self.first, self.last)
+
+    @property
+    def fullname(self):
+        return '{} {}'.format(self.first, self.last)
+
+    @fullname.setter
+    def fullname(self, name):
+        first, last = name.split(' ')
+        self.first = first
+        self.last = last
+
+    @fullname.deleter
+    def fullname(self):
+        self.first = None
+        self.last = None
+
+emp_1 = Employee('John', 'Smith')
+emp_1.email  --> john.smith@email.com
+
+emp_1.fullname = 'Jane Helo'  --> this will change emp_1
+
+del emp_1.fullname  --> emp1 won't have a name any more'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
