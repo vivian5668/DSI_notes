@@ -577,6 +577,13 @@ plt.plot(log_odds, prob)
 
 print(digits.DESCR)
 
+
+
+
+
+
+
+
 Python OOP
 --------------------------------------------
 #print all attrbutes of an object
@@ -587,7 +594,7 @@ print(Employee.__dict__)
  print(issubclass(Developer, Employee)) --> True
 
  #print details of an object
- def __repr(self):
+ def __repr__(self):
      return 'Employee is: {}'.format(name)
 # str should be more user-friendly, repr is for devs
 def __str__(self):
@@ -715,6 +722,43 @@ emp_1.email  --> john.smith@email.com
 emp_1.fullname = 'Jane Helo'  --> this will change emp_1
 
 del emp_1.fullname  --> emp1 won't have a name any more'
+
+--------------------------------------------
+# interface
+from abc import abstractmethod
+
+class LeaderBoardInterface:
+    @abstractmethod
+    def add_score(self, player_id, score):
+        pass
+    
+    @abstractmethod
+    def top(self, number_of_players):
+        pass
+
+    @abstractmethod
+    def bottom(self, number_of_players):
+        pass
+
+    @abstractmethod
+    def reset(self, player_id):
+        pass
+
+from abc import ABC, abstractmethod
+
+class LeaderBoardInterface(ABC):
+    @abstractmethod
+    def add_score(self, player_id, score):
+        pass
+
+    @abstractmethod
+    def top(self, number_of_players):
+        pass
+
+    @abstractmethod 
+    def reset(self, player_id):
+        pass
+
 
 
 
